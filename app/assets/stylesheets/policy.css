@@ -1,0 +1,25 @@
+.main-policy-header {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 50px 0;
+    text-align: center;
+}
+
+.main-policy {
+    margin: 20px auto;
+    width: 700px;
+}
+
+.policy-itemheader {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.policy-list,
+.policy-item {
+    margin: 10px 10px 50px 10px;
+}
+
+.policy-listitem {
+    list-style-type: dotted;
+}

@@ -1,0 +1,199 @@
+.main-body {
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+.profilepicture-box,
+.school_list-box,
+.class_list-box {
+	padding-bottom: 50px;
+}
+
+.profilepicture-header, 
+.add_school-header,
+.add_class-header {
+	font-size: 25px;
+    font-weight: bold;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.profilepicture-holder {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 100px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-around;
+    margin: 50px auto 10px auto;
+    overflow: hidden;
+    width: 200px;
+}
+
+.profilepicture-photo {
+	margin: 0 auto;
+}
+
+.add_school-button,
+.add_class-button {
+	border-radius: 20px;
+	border-style: solid;
+	border-width: 1px;
+	height: 30px;
+	margin: 20px auto;
+	padding-top: 10px;
+	text-align: center;
+	width: 40px;
+}
+
+.add_school-button:hover,
+.add_class-button:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.school {
+	margin: 50px auto;
+	width: 403px;
+}
+
+.class {
+	margin: 50px auto;
+	width: 723px;
+}
+
+.school-index {
+	margin-bottom: -31px;
+}
+
+.class-index {
+	margin-bottom: -45px;
+}
+
+.school-index,
+.class-index {
+	font-weight: bold;
+	text-align: left;
+}
+
+.school-selection-header {
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 3px;
+	font-size: 20px;
+	margin: 2px 2px 2px 30px;
+	padding: 5px;
+	width: 300px;
+}
+
+.schools-list {
+	background-color: white;
+	height: 206px;
+	margin: 0 0 -248.5px 30px;
+	overflow-y: scroll;
+	width: 317px;
+}
+
+.school-listitem {
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 2px;
+	margin: 2px 0;
+	padding: 5px;
+	text-align: center;
+	width: 302px;
+}
+
+.school-listitem:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.class-info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0 0 -62.5px 30px;
+	text-align: left;
+	width: 640px;
+}
+
+.class-info [class$="-header"] {
+	font-weight: bold;
+}
+
+.class-info input {
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 3px;
+	font-size: 20px;
+	margin: 2px;
+	padding: 5px;
+	width: 300px;
+}
+
+.school-delete {
+	margin: -42.5px 0 0 360px;
+}
+
+.class-delete {
+	margin: 20px 0 0 680px;
+}
+
+.school-delete,
+.class-delete {
+	border-radius: 20px;
+	border-style: solid;
+	border-width: 1px;
+	height: 30px;
+	padding-top: 10px;
+	text-align: center;
+	width: 40px;
+}
+
+.school-delete:hover,
+.class-delete:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.profilepicture-holder {
+	background-color: rgba(0, 0, 0, 0.2);
+	border-color: transparent;
+	border-radius: 100px;
+	height: 200px;
+	width: 200px;
+}
+
+.profilepicture-button {
+	border-radius: 2px;
+	border-style: solid;
+	border-width: 2px;
+	margin: 0 auto;
+	padding: 5px 10px;
+	text-align: center;
+	width: 100px;
+}
+
+.accountsetup-error {
+	color: darkred;
+	font-weight: bold;
+	margin: 10px 0;
+	text-align: center;
+}
+
+.accountsetup-save {
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 3px;
+	margin: 0 auto;
+	padding: 3px;
+	text-align: center;
+	width: 100px;
+}
+
+.profilepicture-button:hover,
+.accountsetup-save:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}

@@ -1,0 +1,141 @@
+.main-bankaccount-header {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 50px 0;
+    text-align: center;
+}
+
+.main-bankaccount {
+    margin: 20px auto;
+    width: 700px;
+}
+
+.bankaccount-select-box,
+.bankaccount-input-box {
+    margin: 20px auto 50px auto;
+    width: 400px;
+}
+
+.bankaccount-header {
+    font-size: 20px;
+}
+
+.bankaccount-birthdate-header {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.bankaccount-input,
+.bankaccount-input-short {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 400px;
+}
+
+.bankaccount-select {
+    background-color: white;
+    border-color: rgba(127, 127, 127, 0.5);
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    margin: -27px 0 0 210px;
+    padding: 5px;
+    resize: none;
+    width: 200px;
+}
+
+.bankaccount-select:hover {
+    background-color: rgba(127, 127, 127, 0.05);
+    cursor: pointer;
+}
+
+.bankaccount-indicator {
+    margin: -15px 0 0 180px;
+}
+
+.arrowup,
+.arrowdown {
+    border: solid rgba(127, 127, 127, 0.8);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.arrowup {
+    margin-bottom: 5px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.arrowdown {
+    margin: 0px 0 0 -9px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.bankaccount-selectbox {
+    background-color: #E8E8E8;
+    border-color: black;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    max-height: 200px;
+    margin: 5px 0 0 210px;
+    overflow-y: scroll;
+    width: 210px;
+}
+
+.selectbox-item {
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+.selectbox-item:hover {
+    background-color: rgba(127, 127, 127, 0.1);
+    cursor: pointer;
+}
+
+.main-bankaccount-split {
+    font-size: 37px;
+    margin: 0 5px;
+}
+
+.bankaccount-row {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+}
+
+.bankaccount-input-short {
+    width: 50px;
+}
+
+.bankaccount-checkbox {
+    text-align: center;
+}
+
+.bankaccount-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.bankaccount-options-button {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: white;
+    border-radius: 3px;
+    border-style: solid;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px 0;
+    width: 160px;
+}

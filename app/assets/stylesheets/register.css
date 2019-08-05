@@ -1,0 +1,122 @@
+.register-main {
+	background-color: #1169D9;
+	height: 100vh;
+	width: 100vw;
+}
+
+.register-main-header {
+	height: 50px;
+}
+
+.register-main-logo {
+	margin-left: 20px;
+	width: 125px;
+}
+
+.register-body {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 50px);
+	justify-content: space-around;
+}
+
+.register-form {
+	margin: 0 auto;
+}
+
+.form-header-box {
+	height: 100px;
+	padding: 30px 0;
+	text-align: center;
+}
+
+.form-logo {
+	margin: 0 0 -70px -100px;
+	width: 150px;
+}
+
+.form-header {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0 0 70px 70px;
+}
+
+.form-account_type {
+	margin: 50px auto;
+}
+
+.account_type-header {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.account_type-options {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin: 0 auto;
+	width: 300px;
+}
+
+.account_type-options div {
+	background-color: white;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 0.5px;
+	padding: 5px;
+	text-align: center;
+	width: 100px;
+}
+
+.account_type-options div:hover {
+	background-color: rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+}
+
+.form-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 450px;
+}
+
+.input-header {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.form-row .input-text {
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 0.5px;
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 200px;
+}
+
+.input-text {
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 0.5px;
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 430px;
+}
+
+.form-submit {
+	background-color: white;
+	border-color: white;
+	border-radius: 3px;
+	border-style: solid;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.form-error {
+	color: darkred;
+	font-weight: bold;
+	margin: 10px 0;
+}

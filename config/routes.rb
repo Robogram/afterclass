@@ -1,0 +1,60 @@
+Rails.application.routes.draw do
+	get 'users/index'
+	get 'users/policy'
+	get 'users/terms'
+	post 'questions/ask_instructor'
+	post 'questions/get_question_info'
+	post 'questions/delete_question'
+	post 'questions/scale_vote'
+	post 'questions/answer'
+	post 'questions/remove_all_questions'
+	get 'instructors/get_instructors'
+	post 'instructors/search_instructors'
+	post 'instructors/get_classes'
+	post 'instructors/get_subjects'
+	post 'instructors/join_qa'
+	post 'instructors/get_earnings'
+	post 'payment/get_creditcard'
+	post 'payment/toggle_subscription'
+	post 'payment/get_subscription_info'
+	post 'bankaccount/get_bankaccount_info'
+	post 'bankaccount/transfer'
+	get 'bankaccount/pay_instructors'
+
+	# test
+	get 'payment/reset_everything'
+	
+	resources :accountsetup
+	resources :instructors
+	resources :payment
+	resources :bankaccount
+	resources :questions
+	resources :session
+	resources :users
+	resources :verify
+
+	root 'users#index'
+	root 'users#policy'
+	root 'users#terms'
+	root 'questions#ask_instructor'
+	root 'questions#get_question_info'
+	root 'questions#delete_question'
+	root 'questions#scale_vote'
+	root 'questions#answer'
+	root 'questions#remove_all_questions'
+	root 'instructors#get_instructors'
+	root 'instructors#search_instructors'
+	root 'instructors#get_classes'
+	root 'instructors#get_subjects'
+	root 'instructors#join_qa'
+	root 'instructors#get_earnings'
+	root 'payment#get_creditcard'
+	root 'payment#toggle_subscription'
+	root 'payment#get_subscription_info'
+	root 'bankaccount#get_bankaccount_info'
+	root 'bankaccount#transfer'
+	root 'bankaccount#pay_instructors'
+
+	# test
+	root 'payment#reset_everything'
+end

@@ -1,0 +1,146 @@
+.main-payment-header {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 50px 0;
+    text-align: center;
+}
+
+.main-payment {
+    margin: 20px auto;
+    width: 700px;
+}
+
+.payment-input-box {
+    margin: 20px auto;
+    width: 400px;
+}
+
+.payment-input-header {
+    font-size: 20px;
+}
+
+.payment-input,
+.payment-input-short {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 400px;
+}
+
+.payment-select-box {
+    margin: 20px auto 50px auto;
+    width: 400px;
+}
+
+.payment-select {
+    background-color: white;
+    border-color: rgba(127, 127, 127, 0.5);
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+    resize: none;
+    width: 200px;
+}
+
+.payment-select:hover {
+    background-color: rgba(127, 127, 127, 0.05);
+    cursor: pointer;
+}
+
+.payment-select-header {
+    margin-bottom: -15px;
+}
+
+.payment-indicator {
+    margin: -10px 0 0 180px;
+}
+
+.arrowup,
+.arrowdown {
+    border: solid rgba(127, 127, 127, 0.8);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.arrowup {
+    margin-bottom: 5px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.arrowdown {
+    margin: 0px 0 0 -9px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.payment-selectbox {
+    background-color: #E8E8E8;
+    border-color: black;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    max-height: 200px;
+    margin: 5px 0;
+    overflow-y: scroll;
+    width: 210px;
+}
+
+.selectbox-item {
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+.selectbox-item:hover {
+    background-color: rgba(127, 127, 127, 0.1);
+    cursor: pointer;
+}
+
+.payment-input-short {
+    width: 50px;
+}
+
+.main-payment-split {
+    font-size: 37px;
+    margin: 0 5px;
+}
+
+.payment-row {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+}
+
+.payment-input-short {
+    width: 50px;
+}
+
+.payment-checkbox {
+    text-align: center;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.payment-options-button {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: white;
+    border-radius: 3px;
+    border-style: solid;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px 0;
+    width: 160px;
+}
