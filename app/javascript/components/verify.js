@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'stylesheets/verify.css';
+import 'stylesheets/verify.scss';
 
 export default class verify extends Component {
     constructor(props) {

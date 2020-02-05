@@ -72,8 +72,6 @@ def arrange_questions(questions)
 end
 
 class QuestionsController < ApplicationController
-	protect_from_forgery with: :null_session
-	
 	def show
 		account_type = params[:account_type]
 		invite_code = decrypt_id(params[:id])
@@ -108,52 +106,44 @@ class QuestionsController < ApplicationController
 		user = User.find_by_userid(userid)
 		invite_code = params[:invitecode]
 		student_question = params[:studentquestion]
-		customerid = user.identity
 
-		customer = Stripe::Customer.retrieve(customerid)
-		subscription_id = get_subscription_id(customer)
+		if student_question != ''
+			student = User.find_by_userid(userid)
+			datas = User.where("classes LIKE ?", "%" + invite_code + "%")
+			questionid = ''
+			questionid_length = rand(10..20)
 
-		if subscription_id != ''
-			if student_question != ''
-				student = User.find_by_userid(userid)
-				datas = User.where("classes LIKE ?", "%" + invite_code + "%")
-				questionid = ''
-				questionid_length = rand(10..20)
-
-				for k in 1..questionid_length
-					questionid += rand(0..9) % 2 == 0 ? rand(65..90).chr : rand(0..9).to_s
-				end
-
-				question = {
-					'creatorid': userid,
-					'questionid': questionid,
-					'studentname': student.firstname + " " + student.lastname,
-					'question': student_question,
-					'upvotes': [],
-					'downvotes': [],
-					'answers': [],
-					'students_answer': []
-				}
-
-				datas.each do |data|
-					classes = JSON.parse(data.classes)
-
-					classes.each do |class_info|
-						if class_info['invite_code'] == invite_code
-							class_info['questions'].unshift(question)
-						end
-					end
-
-					data.classes = classes.to_json
-					data.save
-				end
-
-				render json: { 'error': false, 'question': question }
-			else
-				render json: { 'error': true, 'errormsg': 'Your question is blank' }
+			for k in 1..questionid_length
+				questionid += rand(0..9) % 2 == 0 ? rand(65..90).chr : rand(0..9).to_s
 			end
+
+			question = {
+				'creatorid': userid,
+				'questionid': questionid,
+				'studentname': student.firstname + " " + student.lastname,
+				'question': student_question,
+				'upvotes': [],
+				'downvotes': [],
+				'answers': [],
+				'students_answer': []
+			}
+
+			datas.each do |data|
+				classes = JSON.parse(data.classes)
+
+				classes.each do |class_info|
+					if class_info['invite_code'] == invite_code
+						class_info['questions'].unshift(question)
+					end
+				end
+
+				data.classes = classes.to_json
+				data.save
+			end
+
+			render json: { 'error': false, 'question': question }
 		else
-			render json: { 'error': true, 'errormsg': 'inactive' }
+			render json: { 'error': true, 'errormsg': 'Your question is blank' }
 		end
 	end
 
@@ -392,10 +382,6 @@ class QuestionsController < ApplicationController
 
 		find = '"creatorid":"' + userid + '"'
 		instructors = User.find_by_sql("select id, classes from users where classes like '%" + find + "%'")
-		customerid = student.identity
-
-		customer = Stripe::Customer.retrieve(customerid)
-		subscription_id = get_subscription_id(customer)
 
 		instructors.each do |instructor|
 			classes = JSON.parse(instructor.classes)
@@ -421,8 +407,6 @@ class QuestionsController < ApplicationController
 			instructor.classes = classes.to_json
 			instructor.save
 		end
-
-		Stripe::Subscription.delete(subscription_id)
 
 		if !params[:invite_code].nil?
 			invite_code = params[:invite_code]

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'stylesheets/accountsetup.css';
+import 'stylesheets/accountsetup.scss';
 
 import Header from './partials/header'
 import InstructorSidebar from './partials/instructor_sidebar'
@@ -236,19 +236,19 @@ export default class accountsetup extends Component {
                     <div className="profilepicture-box">
                         <div className="profilepicture-header">Profile Picture (Optional)</div>
                         <div className="profilepicture-holder">
-                            {uri !== '' || photo !== '' ? 
+                            {uri || photo ? 
                                 uri ? 
                                     <img alt="" src={uri} style={{ height: height, width: width }} className="profilepicture-photo"/>
                                     :
-                                    <img alt="" src={'/profilepictures/' + photo} style={{ height: height, width: width }} className="profilepicture-photo"/>
+                                    <img alt="" src={'/photos/' + photo} style={{ height: height, width: width }} className="profilepicture-photo"/>
                                 :
-                                <img alt="" src="/profilepictures/default.png" className="profilepicture-photo" style={{ height: 200, width: 200 }}/>
+                                <img alt="" src="/photos/default.png" className="profilepicture-photo" style={{ height: 200, width: 200 }}/>
                             }
                         </div>
                         <div className="profilepicture-button" onClick={() => {
                             var profilepicture_button = document.getElementsByClassName("profilepicture-browse")[0]
 
-                            if (photo !== '') {
+                            if (photo) {
                                 profilepicture_button.value = null
                                 
                                 profilepicture.photo = ''
@@ -259,7 +259,7 @@ export default class accountsetup extends Component {
                             } else {
                                 profilepicture_button.click()
                             }
-                        }}>{profilepicture.photo !== '' ? 'Cancel' : 'Browse'}</div>
+                        }}>{profilepicture.photo ? 'Cancel' : 'Browse'}</div>
                         <input className="profilepicture-browse" type="file" onChange={(photo) => this.browseProfilePicture(photo)} style={{ display: 'none' }}/>
                     </div>
 

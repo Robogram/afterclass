@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { test } from 'infos.js'
 
 export default class student_sidebar extends Component {
     constructor(props) {
@@ -63,7 +64,7 @@ export default class student_sidebar extends Component {
             }
         }
 
-        return <img alt="" src={'/profilepictures/' + photo} style={{ height: photo_height, margin: '0 auto', width: photo_width }}/>;
+        return <img alt="" src={'/photos/' + photo} style={{ height: photo_height, margin: '0 auto', width: photo_width }}/>;
     }
     render() {
         var { userid, account_type, profilepicture, subjects } = this.state
@@ -88,7 +89,6 @@ export default class student_sidebar extends Component {
                 </div>
 
                 <div className="sidebar-tabs">
-                    <div className="sidebar-tab" onClick={() => window.location.assign('/payment')}>Payment</div>
                     <div className="sidebar-tab" onClick={() => window.location.assign('/users/terms')}>Terms</div>
                     <div className="sidebar-tab" onClick={() => window.location.assign('/users/policy')}>Policy</div>
                 </div>

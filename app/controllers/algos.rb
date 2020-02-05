@@ -1,9 +1,5 @@
-require 'stripe'
-
 $test = true
 $key = $test ? 'test' : 'live'
-
-Stripe.api_key = $key
 
 $plug_boards = {
     "1"=>{
@@ -59,7 +55,6 @@ $rotors = {
     }
 }
 
-$monthly_plan = 299
 $is_owner = false
 
 def encrypt_id(userid)
@@ -121,51 +116,4 @@ def decrypt_id(userid)
     userid = userid.join('')
 
     return userid
-end
-
-def get_subscription_id(customer)
-    object_id = ''
-
-    if !customer.subscriptions.data.nil?
-        datas = customer.subscriptions.data
-
-        datas.each do |data|
-            if data.object == 'subscription'
-                object_id = data.id
-            end
-        end
-    end
-
-    return object_id
-end
-
-def get_plan()
-    plan = Stripe::Plan.list(limit: 3)
-    plan_id = ''
-
-    if !plan.nil?
-        plans = plan.data
-
-        plans.each do |plan|
-            if plan.nickname == 'Monthly Subscription'
-                plan_id = plan.id
-            end
-        end
-    end
-
-    if plan_id == ''
-        plan = Stripe::Plan.create({
-            amount: $monthly_plan,
-            interval: "month",
-            product: {
-                "name": "Monthly Subscription",
-                "statement_descriptor": "AClass Subscription"
-            },
-            currency: "cad"
-        })
-
-        plan_id = plan.id
-    end
-
-    return plan_id
 end

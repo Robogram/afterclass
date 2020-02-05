@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import 'stylesheets/register.css';
+import 'stylesheets/register.scss';
+import { user_infos } from 'infos.js'
 
 export default class register extends Component {
     constructor(props) {
@@ -16,12 +17,12 @@ export default class register extends Component {
         }
 
         this.state = {
-            firstname: "Kevin",
-            lastname: "Mai",
-            email: "kevin.mai.730@gmail.com",
+            firstname: user_infos['firstname'],
+            lastname: user_infos['lastname'],
+            email: user_infos['email'],
             account_type: "Student",
-            password: "password",
-            confirmpassword: "password",
+            password: user_infos['password'],
+            confirmpassword: user_infos['confirmpassword'],
             errormsg: "",
             disable_button: false
         }
@@ -75,7 +76,7 @@ export default class register extends Component {
         })
     }
     render() {
-        var { account_type, disable_button } = this.state
+        var { firstname, lastname, email, account_type, password, confirmpassword, disable_button } = this.state
 
         return (
             <div className="register-main">
@@ -95,39 +96,35 @@ export default class register extends Component {
                             <div className="form-header">Register</div>
                         </div>
 
-                        <div className="form-account_type">
-                            <div className="account_type-header">You are a</div>
-                            <div className="account_type-options">
-                                <div className="account_type-instructor" onClick={() => this.setState({ 'account_type': 'Staff' })}>Staff</div>
-                                <div className="account_type-student" onClick={() => this.setState({ 'account_type': 'Student' })}>Student</div>
-                            </div>
-                        </div>
-
                         <div className="form-row">
                             <div className="form-item">
                                 <div className="input-header">First Name:</div>
-                                <input className="input-text" placeholder="First Name" type="text" onChange={(firstname) => this.setState({ 'firstname': firstname.target.value })}/>
+                                <input className="input-text" placeholder="First Name" type="text" onChange={(firstname) => this.setState({ 'firstname': firstname.target.value })} value={firstname}/>
                             </div>
 
                             <div className="form-item">
                                 <div className="input-header">Last Name:</div>
-                                <input className="input-text" placeholder="Last Name" type="text" onChange={(lastname) => this.setState({ 'lastname': lastname.target.value })}/>
+                                <input className="input-text" placeholder="Last Name" type="text" onChange={(lastname) => this.setState({ 'lastname': lastname.target.value })} value={lastname}/>
                             </div>
                         </div>
 
                         <div>
                             <div className="input-header">{account_type} E-mail:</div>
-                            <input className="input-text" placeholder={account_type + " E-mail"} type="email" onChange={(email) => this.setState({ 'email': email.target.value })}/>
+                            <input className="input-text" placeholder={account_type + " E-mail"} type="email" onChange={(email) => {
+                                var account_type = (email.target.value.replace('tdsb', '') != email.target.value) ? 'Staff' : 'Student'
+
+                                this.setState({ 'email': email.target.value, 'account_type': account_type })
+                            }} value={email}/>
                         </div>
 
                         <div className="form-item">
                             <div className="input-header">Password:</div>
-                            <input className="input-text" placeholder="Password" type="password" onChange={(password) => this.setState({ 'password': password.target.value })}/>
+                            <input className="input-text" placeholder="Password" type="password" onChange={(password) => this.setState({ 'password': password.target.value })} value={password}/>
                         </div>
 
                         <div className="form-item">
                             <div className="input-header">Confirm Password:</div>
-                            <input className="input-text" placeholder="Confirm Password" type="password" onChange={(confirmpassword) => this.setState({ 'confirmpassword': confirmpassword.target.value })}/>
+                            <input className="input-text" placeholder="Confirm Password" type="password" onChange={(confirmpassword) => this.setState({ 'confirmpassword': confirmpassword.target.value })} value={confirmpassword}/>
                         </div>
 
                         <div className="form-error">{this.state.errormsg}</div>

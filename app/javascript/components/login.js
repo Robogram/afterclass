@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import 'stylesheets/login.css';
+import 'stylesheets/login.scss';
+import { user_infos } from 'infos.js'
 
 export default class login extends Component {
     constructor(props) {
@@ -16,8 +17,8 @@ export default class login extends Component {
         }
 
         this.state = {
-            email: "kevin.mai.730@gmail.com",
-            password: "password",
+            email: user_infos['email'],
+            password: user_infos['password'],
             errormsg: "",
             disable_button: false
         }
@@ -77,7 +78,7 @@ export default class login extends Component {
         })
     }
     render() {
-        var { disable_button } = this.state
+        var { email, password, disable_button } = this.state
 
         return (
             <div className="login-main">
@@ -99,12 +100,12 @@ export default class login extends Component {
 
                         <div>
                             <div className="input-header">E-mail:</div>
-                            <input className="input-text" placeholder="E-mail" type="email" onChange={(email) => this.setState({ 'email': email.target.value })}/>
+                            <input className="input-text" placeholder="E-mail" type="email" onChange={(email) => this.setState({ 'email': email.target.value })} value={email}/>
                         </div>
 
                         <div>
                             <div className="input-header">Password:</div>
-                            <input className="input-text" placeholder="Password" type="password" onChange={(password) => this.setState({ 'password': password.target.value })}/>
+                            <input className="input-text" placeholder="Password" type="password" onChange={(password) => this.setState({ 'password': password.target.value })} value={password}/>
                         </div>
 
                         <div className="form-error">{this.state.errormsg}</div>

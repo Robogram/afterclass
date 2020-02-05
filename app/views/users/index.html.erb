@@ -1,7 +1,7 @@
 <%= 
 	if session[:userid] == nil
-		react_component('login')
+		react_component('Login')
 	else
-		react_component('questions')
+		react_component('Questions')
 	end
 %>

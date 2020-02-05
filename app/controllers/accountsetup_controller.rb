@@ -1,9 +1,7 @@
 require_relative './algos.rb'
 
 class AccountsetupController < ApplicationController
-    protect_from_forgery with: :null_session
-    
-	def show
+    def show
 		user = User.find_by_userid(decrypt_id(params[:id]))
 
 		@user_info = {}
@@ -20,7 +18,7 @@ class AccountsetupController < ApplicationController
 		photoname = profilepicture['photo']
 		jpg = Base64.decode64(uri[1])
 
-		File.open('public/profilepictures/' + photoname, 'wb') { |f| f.write(jpg) }
+		File.open('public/photos/' + photoname, 'wb') { |f| f.write(jpg) }
 
 		render json: { 'error': false }
 	end

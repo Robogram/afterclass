@@ -1,4 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   userid: MyString
@@ -11,7 +11,8 @@ one:
   subjects: MyText
   classes: MyText
   schools: MyText
-  payment: MyText
+  identity: MyString
+  transfertime: MyString
 
 two:
   userid: MyString
@@ -24,4 +25,5 @@ two:
   subjects: MyText
   classes: MyText
   schools: MyText
-  payment: MyText
+  identity: MyString
+  transfertime: MyString

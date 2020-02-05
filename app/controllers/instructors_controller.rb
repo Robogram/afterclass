@@ -1,11 +1,9 @@
 require_relative './algos.rb'
 
 class InstructorsController < ApplicationController
-	protect_from_forgery with: :null_session
-
 	def index
 	end
-
+	
 	def show
 		user = User.find_by_userid(decrypt_id(params[:id]))
 
@@ -108,8 +106,6 @@ class InstructorsController < ApplicationController
         invite_code = params[:invitecode]
 
         user = User.find_by_userid(userid)
-        customerid = user.identity
-        valid_joining = true
 
 		if invite_code != ''
 			instructors = User.find_by_sql("SELECT * FROM users WHERE classes LIKE '%\"" + invite_code + "\"%'")
@@ -119,42 +115,19 @@ class InstructorsController < ApplicationController
 
 				classes.each do |class_info|
 					if class_info['invite_code'] == invite_code
-						if customerid == ''
-				            errormsg = ''
-
-				            valid_joining = false
-				        end
-
-				        if valid_joining == true
-							class_info['joined_students'].push(userid)
-						else
-							return render json: { 'error': true, 'errormsg': 'nonpayment' }
-						end
+				        class_info['joined_students'].push(userid)
 					end
 				end
 
-				if valid_joining == true
-					instructors[0].classes = classes.to_json
-					instructors[0].save
+				instructors[0].classes = classes.to_json
+				instructors[0].save
 
-					return render json: { 'error': false }
-				end
+				return render json: { 'error': false }
 			else
 				return render json: { 'error': true, 'errormsg': 'Found no instructor associated with the invite code' }
 			end
 		else
 			return render json: { 'error': true, 'errormsg': 'Code is empty' }
 		end
-	end
-
-	def get_earnings
-		userid = decrypt_id(params[:userid])
-
-		user = User.find_by_userid(userid)
-
-		earnings = user.earnings.to_f
-		identity = user.identity != '' ? 'yes' : 'no'
-
-		return render json: { 'error': false, 'earnings': earnings, 'identity': identity }
 	end
 end

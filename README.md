@@ -1,2 +1,24 @@
-# Afterclass
-An educational Q &amp; A webapp where students can ask teachers/professors question about anything related to their homework, projects or assignments
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

@@ -1,9 +1,7 @@
 require_relative './algos.rb'
 
 class UsersController < ApplicationController
-    protect_from_forgery with: :null_session
-    
-	def index
+    def index
     end
 
     def new
@@ -37,8 +35,6 @@ class UsersController < ApplicationController
         user.classes = '[]'
         user.profilepicture = '{ "photo": "", "width": 0, "height": 0 }'
         user.schools = '[]'
-        user.identity = ''
-        user.earnings = '0'
         user.save
 
         render json: { 'error': false, 'userid': encrypt_id(userid), 'account_type': accounttype }

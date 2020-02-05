@@ -12,11 +12,9 @@ export default class instructor_sidebar extends Component {
             account_type: account_type,
             profilepicture: { photo: '', width: 0, height: 0 },
             classes: [],
-            earnings: 0
         }
 
         this.getClasses()
-        this.getEarnings()
     }
     getClasses = () => {
         var { userid } = this.state
@@ -67,35 +65,10 @@ export default class instructor_sidebar extends Component {
             }
         }
 
-        return <img alt="" src={'/profilepictures/' + photo} style={{ height: photo_height, margin: '0 auto', width: photo_width }}/>;
-    }
-    getEarnings = () => {
-        var { userid } = this.state
-        var token = document.getElementsByName("csrf-token")[0].content
-
-        fetch('/instructors/get_earnings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-Token': token
-            },
-            body: JSON.stringify({ userid: userid })
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            var error = response.error
-            var earnings
-
-            if (!error) {
-                earnings = response.earnings
-
-                this.setState({ 'earnings': earnings })
-            }
-        })
+        return <img alt="" src={'/photos/' + photo} style={{ height: photo_height, margin: '0 auto', width: photo_width }}/>;
     }
     render() {
-        var { userid, new_user, account_type, profilepicture, classes, earnings } = this.state
+        var { userid, new_user, account_type, profilepicture, classes } = this.state
 
         return (
             <div>
@@ -130,8 +103,6 @@ export default class instructor_sidebar extends Component {
 
                 {new_user === "false" ? 
                     <div className="sidebar-tabs">
-                        <div className="earnings-header">Your earning(s): $ {earnings}</div>
-                        <div className="sidebar-tab" onClick={() => window.location.assign('/bankaccount')}>Bank Account</div>
                         <div className="sidebar-tab" onClick={() => window.location.assign('/users/terms')}>Terms</div>
                         <div className="sidebar-tab" onClick={() => window.location.assign('/users/policy')}>Policy</div>
                     </div>

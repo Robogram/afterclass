@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import 'stylesheets/instructors.css';
-import 'javascripts/encryption.js'
+import 'stylesheets/instructors.scss';
+import { test, decrypt_id, encrypt_id } from 'infos.js'
 
 import Header from './partials/header'
 import StudentSidebar from './partials/student_sidebar'
@@ -22,69 +22,10 @@ export default class instructors extends Component {
             search_instructor: "",
             visibleCodeBox: false,
             errormsg: '',
-            invite_code: '',
-            subscription: '',
-            non_payment_box: false
+            invite_code: ''
         }
 
-        this.getSubscriptionInfo()
         this.getInstructors()
-    }
-    getSubscriptionInfo = () => {
-        var { userid } = this.state
-        var csrf_token = document.getElementsByName("csrf-token")[0].content
-
-        fetch('/payment/get_subscription_info', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-Token': csrf_token
-            },
-            body: JSON.stringify({ userid: userid })
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            var error = response.error
-            var subscription
-
-            if (!error) {
-                subscription = response.subscription
-
-                this.setState({ 'subscription': subscription })
-            }
-        })
-    }
-    toggleSubscription = () => {
-        var { userid, subscription } = this.state
-        var csrf_token = document.getElementsByName("csrf-token")[0].content
-
-        this.setState({ 'subscription': 'await' })
-
-        if (subscription !== 'await') {
-            fetch('/payment/toggle_subscription', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-Token': csrf_token
-                },
-                body: JSON.stringify({ userid: userid })
-            })
-            .then((response) => response.json())
-            .then((response) => {
-                var error = response.error
-                var subscription = response.subscription
-
-                if (!error) {
-                    if (subscription === 'non') {
-                        window.location = '/payment'
-                    }
-                    
-                    this.setState({ 'subscription': subscription })
-                }
-            })
-        }
     }
     getInstructors = () => {
         fetch('/instructors/get_instructors', {
@@ -169,7 +110,7 @@ export default class instructors extends Component {
             }
         }
 
-        return <img alt="" src={'/profilepictures/' + photo} style={{ height: photo_height, margin: '0 auto', width: photo_width }}/>;
+        return <img alt="" src={'/photos/' + photo} style={{ height: photo_height, margin: '0 auto', width: photo_width }}/>;
     }
     isAllJoined = (classes) => {
         var { userid } = this.state
@@ -213,86 +154,72 @@ export default class instructors extends Component {
             } else {
                 errormsg = response.errormsg
 
-                if (errormsg === 'nonpayment') {
-                    localStorage.setItem("invite_code", invite_code)
-
-                    this.setState({ 'visibleCodeBox': false, 'non_payment_box': true })
-                } else {
-                    this.setState({ 'errormsg': errormsg })
-                }
+                this.setState({ 'errormsg': errormsg })
             }
         })
     }
     render() {
-        var { userid, account_type, instructors, visibleCodeBox, errormsg, subscription, non_payment_box } = this.state
+        var { userid, account_type, instructors, visibleCodeBox, errormsg } = this.state
         var instructors_list = this.displayInstructor(instructors)
 
         userid = decrypt_id(userid)
 
         return (
             <div className="main">
-                {subscription ? 
-                    <div>
-                        <Header onClick={() => this.toggleSubscription()} subscription={subscription} key={subscription}/>
-                        <div className="main-sidebar">
-                            <StudentSidebar/>
-                        </div>
-                        <div className="main-body">
-                            <div className="find_instructor-header">Find your instructor by their name or code</div>
-                            <div style={{ textAlign: 'center' }}><input className="instructor_name-input" placeholder="Enter name" onChange={(search_instructor) => {
-                                this.setState({ 'search_instructor': search_instructor.target.value })
-                                this.searchInstructors()
-                            }}/></div>
+                <Header/>
+                <div className="main-sidebar">
+                    <StudentSidebar/>
+                </div>
+                <div className="main-body">
+                    <div className="find_instructor-header">Find your instructor by their name or code</div>
+                    <div style={{ textAlign: 'center' }}><input className="instructor_name-input" placeholder="Enter name" onChange={(search_instructor) => {
+                        this.setState({ 'search_instructor': search_instructor.target.value })
+                        this.searchInstructors()
+                    }}/></div>
 
-                            {instructors.length > 0 ? 
-                                <div className="instructors">
-                                    {instructors_list.map((each_list, index) => (
-                                        <div className="instructor-list" key={index}>
-                                            {each_list.list.map((instructor, index) => (
-                                                <div className={this.isAllJoined(instructor.classes) ? 'instructor-disable' : 'instructor'} onClick={() => {
-                                                    this.isAllJoined(instructor.classes) ? 
-                                                        null
+                    {instructors.length > 0 ? 
+                        <div className="instructors">
+                            {instructors_list.map((each_list, index) => (
+                                <div className="instructor-list" key={index}>
+                                    {each_list.list.map((instructor, index) => (
+                                        <div className={this.isAllJoined(instructor.classes) ? 'instructor-disable' : 'instructor'} onClick={() => {
+                                            this.isAllJoined(instructor.classes) ? 
+                                                null
+                                                :
+                                                this.setState({ 'visibleCodeBox': true })
+                                        }} key={index}>
+                                            <div className="instructor-name">{instructor.name}</div>
+                                            <div className="instructor-profilepicture-holder">{this.displayProfile(instructor.profilepicture)}</div>
+                                            <div className="instructor-classes">
+                                                {instructor.classes.map((class_info, index) => (
+                                                    test ? 
+                                                        <div className="instructor-class" key={index}>{class_info.class_name + " : " + class_info.invite_code}</div>
                                                         :
-                                                        this.setState({ 'visibleCodeBox': true })
-                                                }} key={index}>
-                                                    <div className="instructor-name">{instructor.name}</div>
-                                                    <div className="instructor-profilepicture-holder">{this.displayProfile(instructor.profilepicture)}</div>
-                                                    <div className="instructor-classes">
-                                                        {instructor.classes.map((class_info, index) => (
-                                                            <div className="instructor-class" key={index}>{class_info.class_name}</div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            ))}
+                                                        <div className="instructor-class" key={index}>{class_info.class_name}</div>
+                                                ))}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
-                                :
-                                <div className="instructors-no_results"><div>No Result(s)</div></div>
-                            }
+                            ))}
                         </div>
-                        {visibleCodeBox || non_payment_box ? 
-                            <div className="hidden_box" style={{ display: 'flex' }}>
-                                {visibleCodeBox ? 
-                                    <div className="code_box">
-                                        <div className="code-header">Enter the 8 characters invite code</div>
-                                        <input className="code-input" type="text" onChange={(invite_code) => this.setState({ 'invite_code': invite_code.target.value })}/>
+                        :
+                        <div className="instructors-no_results"><div>No Result(s)</div></div>
+                    }
+                </div>
+                {visibleCodeBox ? 
+                    <div className="hidden_box" style={{ display: 'flex' }}>
+                        {visibleCodeBox ? 
+                            <div className="code_box">
+                                <div className="code-header">Enter the 8 characters invite code</div>
+                                <input className="code-input" type="text" onChange={(invite_code) => this.setState({ 'invite_code': invite_code.target.value })}/>
 
-                                        <div className="code-error">{errormsg}</div>
+                                <div className="code-error">{errormsg}</div>
 
-                                        <div className="code-options">
-                                            <div className="code-button" onClick={() => this.setState({ 'visibleCodeBox': false })}>Cancel</div>
-                                            <div className="code-button" onClick={this.joinQA}>Done</div>
-                                        </div>
-                                    </div>
-                                : null }
-                                {non_payment_box ? 
-                                    <div className="error-payment-box">
-                                        <div className="error-payment-header">You need to be subscribed to our plan of $2.99/month to continue</div>
-
-                                        <div className="error-payment-header">Click <strong onClick={() => window.location.assign('/payment')}>here</strong> to enter your billing information</div>
-                                    </div>
-                                : null }
+                                <div className="code-options">
+                                    <div className="code-button" onClick={() => this.setState({ 'visibleCodeBox': false })}>Cancel</div>
+                                    <div className="code-button" onClick={this.joinQA}>Done</div>
+                                </div>
                             </div>
                         : null }
                     </div>
